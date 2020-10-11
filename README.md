@@ -7,7 +7,7 @@ This model is then compared to an Azure AutoML run.
 
 ## Summary
 **In 1-2 sentences, explain the problem statement: e.g "This dataset contains data about... we seek to predict..."**
-
+The dataset is called **bankmarketing**, it is a database of customers of a banck that contains some demographic data: "age", "marital_status", "education", "whether they have a loan or not", etc. We want to predict the column called "y", which indicates (probably) whether they responded to a marketing campaign or not.
 **In 1-2 sentences, explain the solution: e.g. "The best performing model was a ..."**
 
 ## Scikit-learn Pipeline
