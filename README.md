@@ -10,15 +10,12 @@ The dataset is called **bankmarketing**, it is a database of customers of a banc
 The best performing model was VotingEnsamble, with an accuracy of 0.91.
 
 ## Scikit-learn Pipeline
-**Explain the pipeline architecture, including data, hyperparameter tuning, and classification algorithm.**
 The data was downloaded from the following URL: "https://automlsamplenotebookdata.blob.core.windows.net/automl-sample-notebook-data/bankmarketing_train.csv". All the features were converted to numerical values and then HyperDrive was used to finde the best parameters for a LogisticRegression model.
 The parameter "C" (inverse of regularization strength) was chosen randomly between 0.1 and 1. 
 Hyperdrive found that the optimal C is 0.76, getting an accuracy of 0.908.
 
-
-**What are the benefits of the parameter sampler you chose?**
 In general, a lower value of "C" penalizes higher values of the parameters of the model (hence avoiding overfitting). However, a very low value of "C" may be counterproductive and the model won't learn properly. So it is a good idea to let Hyperdrive to find the right value.
-**What are the benefits of the early stopping policy you chose?**
+
 We choose a BanditPolicy with slack_factor=0.1 and evaluation_interval=2. This means that when the accuracy of a run (after 2 iterations) is 10% lower than the best one that run is cancelled. 
 
 ## AutoML
@@ -26,14 +23,12 @@ We choose a BanditPolicy with slack_factor=0.1 and evaluation_interval=2. This m
 The best model, chosen by AutoML, was VotingEnsamble with an accuracy of 0.917. 
 
 ## Pipeline comparison
-**Compare the two models and their performance. What are the differences in accuracy? In architecture? If there was a difference, why do you think there was one?**
 As mentioned before, the model "VotingEnsamble", found by AutoML, was superior to "LogisticRegression", even with its hyperparameters optimized with HyperDrive. In the first case, the accuracy was 0.917, while in the second case was of 0.908. Being two different models, their architecture is not comparable. 
 Since AutoML tries several model architectures at once and choose the one with the best performance, it is natural to expect that AutoML will get better results than HyperDrive, which only considers the unique model introduced by the user.
 
 ## Future work
-**What are some areas of improvement for future experiments? Why might these improvements help the model?**
 One of the nicest features of AutoML is that it alerts the user when the dataset is imbalanced, like in this case. The first step to improve the results will be to deal with the imbalance problem (using some augmentation technique, for example).
-The use of "accuracy" as the performance metric should be look up in detail as well.
+The use of "accuracy" as the performance metric should be look up in detail, maybe it would be better to use other metrics like "precision" or "recall" to measure the model as well.
 
 ## Proof of cluster clean up
 **If you did not delete your compute cluster in the code, please complete this section. Otherwise, delete this section.**
