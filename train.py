@@ -13,7 +13,6 @@ from azureml.data.dataset_factory import TabularDatasetFactory
 
 
 
-run = Run.get_context()
 
 def clean_data(data):
     # Dict for cleaning data
@@ -44,12 +43,9 @@ def clean_data(data):
 # TODO: Create TabularDataset using TabularDatasetFactory
 # Data is located at:
 # "https://automlsamplenotebookdata.blob.core.windows.net/automl-sample-notebook-data/bankmarketing_train.csv"
-ds = Dataset.Tabular.from_delimited_files("https://automlsamplenotebookdata.blob.core.windows.net/automl-sample-notebook-data/bankmarketing_train.csv")
-x, y = clean_data(ds)
+
 
 # TODO: Split data into train and test sets.
-#training_data, validation_data = dataset.random_split(percentage=0.8, seed=1)
-x_train, x_test, y_train, y_test=train_test_split(x, y, test_size=0.1, random_state=42)
 
     
 
@@ -61,9 +57,12 @@ def main():
     parser.add_argument('--max_iter', type=int, default=100, help="Maximum number of iterations to converge")
 
     args = parser.parse_args()
-
+    run = Run.get_context()
     run.log("Regularization Strength:", np.float(args.C))
     run.log("Max iterations:", np.int(args.max_iter))
+    ds = TabularDatasetFactory.from_delimited_files("https://automlsamplenotebookdata.blob.core.windows.net/automl-sample-notebook-data/bankmarketing_train.csv")
+    x, y = clean_data(ds)
+    x_train, x_test, y_train, y_test=train_test_split(x, y, test_size=0.2, random_state=2)
 
     model = LogisticRegression(C=args.C, max_iter=args.max_iter).fit(x_train, y_train)
 
