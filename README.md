@@ -28,6 +28,7 @@ Since AutoML tries several model architectures at once and choose the one with t
 
 ## Future work
 One of the nicest features of AutoML is that it alerts the user when the dataset is imbalanced, like in this case. The first step to improve the results will be to deal with the imbalance problem (using some augmentation technique, for example).
-The use of "accuracy" as the performance metric should be look up in detail, maybe it would be better to use other metrics like "precision" or "recall" to measure the model as well.
+The use of "accuracy" as the performance metric should be look up in detail, maybe it would be better to use other metrics like "precision" or "recall" to measure the model as well. The previous changes would improve the pipelines giving more precise information about the performance of the models.
+Now, in order to improve the model itself, one possibility would be to perform hyperparameter tuning on that specific model (VotingClassifier), with a greater set of parameters, with the help of BayesianSampling.
 
 
